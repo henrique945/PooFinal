@@ -18,6 +18,9 @@ public class PooFinal {
 		// TODO code application logic here
 //		to aki
 //		tamen to aki
+
+	XML x = new XML();
+	x.teste();
 	}
 	
 }
