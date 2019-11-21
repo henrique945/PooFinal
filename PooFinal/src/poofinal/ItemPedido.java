@@ -12,7 +12,6 @@ public class ItemPedido {
     
     
     //getters and setters
-
     public int getCodigo() {
         return codigo;
     }
@@ -28,6 +27,24 @@ public class ItemPedido {
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
+    
+    public Produto getProduto(){
+        return produto;
+    }
+    
+    public void setProduto(Produto produto){
+        this.produto = produto;
+    }
+    
+    //metódos
+    public double totalItem(){
+        return quantidade * produto.getPreco();
+    }
+    
+    public double totalItemImposto(){
+        return quantidade * produto.getImposto();
+    }
+    
     
     
 }

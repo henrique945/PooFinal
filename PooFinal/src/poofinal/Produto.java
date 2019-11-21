@@ -6,7 +6,7 @@ public class Produto {
     private String nome;
     private double preco;
     private int moeda;
-    private double impost;
+    private double imposto;
     //referencia a categoria
     private Categoria categoria;
     
@@ -47,12 +47,12 @@ public class Produto {
         this.moeda = moeda;
     }
 
-    public double getImpost() {
-        return impost;
+    public double getImposto() {
+        return imposto;
     }
 
-    public void setImpost(double impost) {
-        this.impost = impost;
+    public void setImposto(double imposto) {
+        this.imposto = imposto;
     }
     
     

@@ -32,6 +32,26 @@ public class Pedido {
         this.data = data;
     }
     
+    //metódos
+    public double totalPedidos(){
+        double total = 0;
+        
+        for(ItemPedido ip : listItemPedidos){
+            total += ip.totalItem();
+        }
+        
+        return total;
+    }
+    
+    public double totalImposto(){
+        double total = 0;
+        
+        for(ItemPedido ip : listItemPedidos){
+            total += ip.totalItemImposto();
+        }
+        
+        return total;
+    }
     
     
     
