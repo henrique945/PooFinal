@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Pedido {
+    private static long auxNum = 0;
     private long numero;
     private Date data;
     //referencia a itens pedidos
@@ -12,7 +13,10 @@ public class Pedido {
     private Cliente cliente;
     
     //construtor
-    
+    public Pedido(Date data){
+        this.numero = ++this.auxNum;
+        this.data = data;
+    }
     
     
     //getters and setters

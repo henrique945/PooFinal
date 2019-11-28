@@ -3,7 +3,7 @@ package poofinal;
 import java.util.ArrayList;
 
 public class Cliente {
-    private static int numCodigo;
+    private static int numCodigo = 0;
     private int codigo;
     private String nome;
     private String endereco;
@@ -14,7 +14,10 @@ public class Cliente {
     private ArrayList<Pedido> listPedidos = new ArrayList();
     
     //construtor
-    
+    public Cliente(String nome){
+        this.codigo = ++this.numCodigo;
+        this.nome = nome;
+    }
     
     //getters and setters
     public int getCodigo() {

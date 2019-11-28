@@ -12,7 +12,13 @@ public class Produto {
     
     
     //construtor
-    
+    public Produto(String nome, double preco, int moeda, double imposto){
+        this.codigo = ++this.numCodigo;
+        this.nome = nome;
+        this.preco = preco;
+        this.moeda = moeda;
+        this.imposto = imposto;
+    }
     
     //getters and setters
     public int getCodigo() {

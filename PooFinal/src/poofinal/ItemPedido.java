@@ -9,7 +9,10 @@ public class ItemPedido {
     
     
     //construtores
-    
+    public ItemPedido(int quantidade){
+        this.codigo = ++this.numCodigo;
+        this.quantidade = quantidade;
+    }
     
     //getters and setters
     public int getCodigo() {

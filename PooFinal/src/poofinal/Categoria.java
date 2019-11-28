@@ -4,7 +4,9 @@ public class Categoria {
     private String descricao;
     
     //construtor
-    
+    public Categoria(String descricao){
+        this.descricao = descricao;
+    }
     
     //getters and setters
 
