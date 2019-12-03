@@ -1,11 +1,12 @@
 package poofinal;
 
-public class ProdutoMercadoInterno extends Produto {
+public class ProdutoMercadoInterno extends Produto 
+{	
     private boolean incentivo;
     
     //construtor
-    public ProdutoMercadoInterno(boolean incentivo, String nome, double preco, int moeda, double imposto){
-        super(nome, preco, moeda, imposto);
+    public ProdutoMercadoInterno(String nome, double preco, double imposto, boolean incentivo){
+        super(nome, preco, imposto);
         this.incentivo = incentivo;
     }
     
@@ -17,6 +18,4 @@ public class ProdutoMercadoInterno extends Produto {
     public void setIncentivo(boolean incentivo) {
         this.incentivo = incentivo;
     }
-    
-    
 }

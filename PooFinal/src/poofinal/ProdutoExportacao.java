@@ -1,11 +1,12 @@
 package poofinal;
 
-public class ProdutoExportacao extends Produto {
+public class ProdutoExportacao extends Produto 
+{	
     private String destino;
     
     //construtor
-    public ProdutoExportacao(String destino, String nome, double preco, int moeda, double imposto){
-        super(nome, preco, moeda, imposto);
+    public ProdutoExportacao(String nome, double preco, double imposto, String destino){
+        super(nome, preco, imposto);
         this.destino = destino;
     }
     
@@ -16,8 +17,5 @@ public class ProdutoExportacao extends Produto {
 
     public void setDestino(String destino) {
         this.destino = destino;
-    }
-    
-    
-    
+    }    
 }

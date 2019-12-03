@@ -1,26 +1,22 @@
 package poofinal;
 
-public class ItemPedido {
-    private static int numCodigo;
-    private int codigo;
+public class ItemPedido 
+{
+    private int numero;
     private int quantidade;
     //referencia a produto
     private Produto produto;
     
-    
     //construtores
-    public ItemPedido(int quantidade){
-        this.codigo = ++this.numCodigo;
+    public ItemPedido(int numero, Produto produto, int quantidade){
+        this.numero = numero;
+		this.produto = produto;
         this.quantidade = quantidade;
     }
     
     //getters and setters
-    public int getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public int getNumero() {
+        return numero;
     }
 
     public int getQuantidade() {
@@ -43,11 +39,8 @@ public class ItemPedido {
     public double totalItem(){
         return quantidade * produto.getPreco();
     }
-    
+	
     public double totalItemImposto(){
-        return quantidade * produto.getImposto();
+        return quantidade * produto.getPreco() * produto.getImposto();
     }
-    
-    
-    
 }

@@ -2,30 +2,31 @@ package poofinal;
 
 import java.util.ArrayList;
 
-public class Cliente {
-    private static int numCodigo = 0;
+public class Cliente 
+{
+    // para gerar codigo sequencial
+	private static int codigoAtual = 0;
+	
     private int codigo;
     private String nome;
     private String endereco;
     private String telefone;
-    private int status;
     private double limite;
     //referencia a pedidos
-    private ArrayList<Pedido> listPedidos = new ArrayList();
+    private ArrayList<Pedido> pedidos = new ArrayList();
     
     //construtor
-    public Cliente(String nome){
-        this.codigo = ++this.numCodigo;
+    public Cliente(String nome, String endereco){
+        this.codigo = ++codigoAtual;
         this.nome = nome;
+		this.endereco = endereco;
+		this.telefone = "(vazio)";
+		this.limite = 1000.0;  // limite padrao
     }
     
     //getters and setters
     public int getCodigo() {
         return codigo;
-    }
-
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
     }
 
     public String getNome() {
@@ -52,14 +53,6 @@ public class Cliente {
         this.telefone = telefone;
     }
 
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
     public double getLimite() {
         return limite;
     }
@@ -67,9 +60,14 @@ public class Cliente {
     public void setLimite(double limite) {
         this.limite = limite;
     }
-    
-    
-    
-    
-    
+	
+	public ArrayList<Pedido> getPedidos()
+	{
+		return pedidos;
+	}
+	
+	public boolean addPedido(Pedido pedido)
+	{
+		return pedidos.add(pedido);
+	}
 }

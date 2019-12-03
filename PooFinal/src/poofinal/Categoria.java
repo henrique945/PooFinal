@@ -3,7 +3,12 @@ package poofinal;
 public class Categoria {
     private String descricao;
     
-    //construtor
+    //construtores
+	public Categoria()
+	{
+		this.descricao = "Sem descricao";
+	}
+	
     public Categoria(String descricao){
         this.descricao = descricao;
     }
