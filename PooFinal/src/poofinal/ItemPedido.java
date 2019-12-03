@@ -43,4 +43,9 @@ public class ItemPedido
     public double totalItemImposto(){
         return quantidade * produto.getPreco() * produto.getImposto();
     }
+
+	@Override
+	public String toString() {
+		return "Item #" + numero + " >> " + produto.getNome() + " (Qtd.: " + quantidade + ")";
+	}
 }

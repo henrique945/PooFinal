@@ -1,6 +1,7 @@
 package poofinal;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Cliente 
 {
@@ -12,6 +13,8 @@ public class Cliente
     private String endereco;
     private String telefone;
     private double limite;
+	private double saldo;
+
     //referencia a pedidos
     private ArrayList<Pedido> pedidos = new ArrayList();
     
@@ -22,6 +25,7 @@ public class Cliente
 		this.endereco = endereco;
 		this.telefone = "(vazio)";
 		this.limite = 1000.0;  // limite padrao
+		this.saldo = this.limite;
     }
     
     //getters and setters
@@ -61,6 +65,26 @@ public class Cliente
         this.limite = limite;
     }
 	
+	public double getSaldo() {
+		return saldo;
+	}
+
+	public void restaurarSaldo(double quantidade) {
+		saldo += quantidade;
+		if (saldo > limite)
+			saldo = limite;
+	}
+	
+	public boolean usarSaldo(double quantidade) {
+		if (saldo >= quantidade)
+		{
+			saldo -= quantidade;
+			return true;
+		}
+		
+		return false;
+	}
+	
 	public ArrayList<Pedido> getPedidos()
 	{
 		return pedidos;
@@ -70,4 +94,36 @@ public class Cliente
 	{
 		return pedidos.add(pedido);
 	}
+
+	@Override
+	public int hashCode() {
+		int hash = 3;
+		hash = 47 * hash + Objects.hashCode(this.nome);
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		final Cliente other = (Cliente) obj;
+		if (!Objects.equals(this.nome, other.nome)) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "#" + codigo + " >> " + nome + ", limite: " + limite + ", saldo: " + saldo;
+	}
+	
+	
 }

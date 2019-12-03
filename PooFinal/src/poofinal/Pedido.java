@@ -1,5 +1,6 @@
 package poofinal;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -8,7 +9,6 @@ public class Pedido
 	// status de pedido
 	public static final int STATUS_ABERTO = 0;
 	public static final int STATUS_FINALIZADO = 1;
-	public static final int STATUS_CANCELADO = 2;
 	
 	// para gerar codigo sequencial
     private static long numeroAtual = 0;
@@ -80,7 +80,17 @@ public class Pedido
     
 	public boolean addItem(Produto produto, int quantidade)
 	{
-		int numItem = itens.size() + 1;
+		int numItem;
+		if (itens.size() == 0)
+		{
+			numItem = 1;
+		}
+		else 
+		{
+			// pega o ultimo elemento da lista e soma 1
+			numItem = itens.get(itens.size() - 1).getNumero();
+			++numItem;
+		}
 		return itens.add(new ItemPedido(numItem, produto, quantidade));
 	}
 	
@@ -94,4 +104,57 @@ public class Pedido
 		
 		return false;
 	}
+	
+	public boolean temProduto(Produto produto)
+	{
+		for (ItemPedido ip : itens)
+		{
+			if (ip.getProduto().equals(produto))
+				return true;
+		}
+		
+		return false;
+	}
+	
+	public void listarPedidoCompleto()
+	{
+		System.out.println(this);
+		System.out.println("Itens:");
+		for (ItemPedido ip : itens)
+			System.out.println(ip);
+	}
+
+	@Override
+	public int hashCode() {
+		int hash = 7;
+		hash = 47 * hash + (int) (this.numero ^ (this.numero >>> 32));
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		final Pedido other = (Pedido) obj;
+		if (this.numero != other.numero) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
+		return "#" + numero + ", data: " + dateFormat.format(data) + ", cliente: " + cliente.getNome() + " status:" 
+				+ (status == Pedido.STATUS_ABERTO ? "aberto" : "finalizado");
+	}
+	
+	
 }

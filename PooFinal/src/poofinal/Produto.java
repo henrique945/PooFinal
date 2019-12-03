@@ -1,5 +1,7 @@
 package poofinal;
 
+import java.util.Objects;
+
 public class Produto 
 {
 	// moedas
@@ -24,12 +26,13 @@ public class Produto
     private Categoria categoria;
     
     //construtor
-    public Produto(String nome, double preco, double imposto){
+    public Produto(String nome, Categoria categoria, double preco, double imposto){
         this.codigo = ++codigoAtual;
         this.nome = nome;
         this.preco = preco;
         this.moeda = MOEDA_BRL; // moeda padrao
         this.imposto = imposto;
+		this.categoria = categoria;
     }
     
     //getters and setters
@@ -68,4 +71,44 @@ public class Produto
     public void setImposto(double imposto) {
         this.imposto = imposto;
     }
+	
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+
+	@Override
+	public int hashCode() {
+		int hash = 3;
+		hash = 83 * hash + Objects.hashCode(this.nome);
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		final Produto other = (Produto) obj;
+		if (!Objects.equals(this.nome, other.nome)) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "#" + codigo + " >> " + nome + ", preco: " + preco + ", categoria: " + categoria.getDescricao();
+	}
+	
+	
 }
