@@ -24,7 +24,7 @@ public class Cliente
         this.nome = nome;
 		this.endereco = endereco;
 		this.telefone = "(vazio)";
-		this.limite = 1000.0;  // limite padrao
+		this.limite = 100000.0;  // limite padrao
 		this.saldo = this.limite;
     }
     

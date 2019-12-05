@@ -1,3 +1,13 @@
+/*
+Facens - Faculdade de Engenharia de Sorocaba
+Disciplina: Programação Orientada a Objetos I
+Assunto: Trabalho Final POO
+
+Alunos:
+- Henrique Rodrigues Silva - 190898
+- Rodolfo Ribeiro Antunes Filho - 120090
+*/
+
 package poofinal;
 
 import java.util.Date;
@@ -34,8 +44,13 @@ public class PooFinal
     private static TreeMap<String, Categoria> mapCategorias = new TreeMap();
     private static TreeMap<String, Pedido> mapPedidos = new TreeMap();
 	
+	
+	
     public static void main(String[] args) 
 	{
+		// dados iniciais
+		cadastrarDadosIniciais();
+		
 		// criacao do menu
 		Integer contagem = 1;
 		menu.put(contagem++, new OpcaoMenu(PooFinal::criarCliente, "Cadastrar Cliente"));
@@ -52,6 +67,7 @@ public class PooFinal
 		menu.put(contagem++, new OpcaoMenu(PooFinal::listarCategoria, "Listar Categoria"));
 		menu.put(contagem++, new OpcaoMenu(PooFinal::criarPedido, "Criar Pedido"));
 		menu.put(contagem++, new OpcaoMenu(PooFinal::listarPedidos, "Listar Pedidos"));
+		menu.put(contagem++, new OpcaoMenu(PooFinal::listarPedidoPorCliente, "Listar Pedido por Cliente"));
 		menu.put(contagem++, new OpcaoMenu(PooFinal::baixarPedido, "Baixar Pedido"));
 		menu.put(contagem++, new OpcaoMenu(PooFinal::encerrar, "Encerrar"));
 		
@@ -86,6 +102,77 @@ public class PooFinal
 			}			
 		}
     }
+	
+	public static void cadastrarDadosIniciais()
+	{
+		Cliente c;
+		c = new Cliente("Jose Silva", "Rua do Jose Silva, 123");
+		mapClientes.put(c.getNome(), c);
+		c = new Cliente("Joao Rosa", "Rua Pedrosa, 999");
+		mapClientes.put(c.getNome(), c);
+		c = new Cliente("Maria Santos", "Avenida da Salvacao, 666");
+		mapClientes.put(c.getNome(), c);
+		c = new Cliente("Paulo Castro", "Rua Itavuvu, 5600");
+		mapClientes.put(c.getNome(), c);
+		
+		Categoria cat;
+		cat = new Categoria("Eletronicos");
+		mapCategorias.put(cat.getDescricao(), cat);
+		cat = new Categoria("Moveis");
+		mapCategorias.put(cat.getDescricao(), cat);
+		cat = new Categoria("Eletrodomesticos");
+		mapCategorias.put(cat.getDescricao(), cat);
+		cat = new Categoria("Alimenticios");
+		mapCategorias.put(cat.getDescricao(), cat);
+		
+		Produto p;
+		p = new ProdutoMercadoInterno("Geladeira", mapCategorias.get("Eletrodomesticos"), 2000.0, Produto.IMPOSTO_CATEGORIA_1, false);
+		mapProdutos.put(p.getNome(), p);
+		p = new ProdutoMercadoInterno("Fogao", mapCategorias.get("Eletrodomesticos"), 1000.0, Produto.IMPOSTO_CATEGORIA_1, false);
+		mapProdutos.put(p.getNome(), p);
+		p = new ProdutoMercadoInterno("Cafeteira", mapCategorias.get("Eletrodomesticos"), 500.0, Produto.IMPOSTO_CATEGORIA_2, false);
+		mapProdutos.put(p.getNome(), p);
+		p = new ProdutoMercadoInterno("Achocolatado", mapCategorias.get("Alimenticios"), 15.0, Produto.IMPOSTO_CATEGORIA_3, false);
+		mapProdutos.put(p.getNome(), p);
+		p = new ProdutoExportacao("Televisor", mapCategorias.get("Eletronicos"), 2000.0, Produto.IMPOSTO_CATEGORIA_2, "Canada");
+		mapProdutos.put(p.getNome(), p);
+		p = new ProdutoExportacao("Notebook", mapCategorias.get("Eletronicos"), 1000.0, Produto.IMPOSTO_CATEGORIA_2, "Canada");
+		mapProdutos.put(p.getNome(), p);
+		p = new ProdutoExportacao("Soja", mapCategorias.get("Alimenticios"), 500.0, Produto.IMPOSTO_CATEGORIA_2, "Canada");
+		mapProdutos.put(p.getNome(), p);
+		p = new ProdutoExportacao("Carne", mapCategorias.get("Alimenticios"), 55.0, Produto.IMPOSTO_CATEGORIA_2, "Franca");
+		mapProdutos.put(p.getNome(), p);
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
+		Date data = null;
+		Long numero;
+		Cliente cli = null;
+		
+		Pedido ped = null;
+		try	{ data = dateFormat.parse("12/12/2019"); }catch (Exception e) {}
+		ped = new Pedido(data);
+		cli = mapClientes.get("Jose Silva");
+		ped.setCliente(cli);
+		ped.addItem(mapProdutos.get("Televisor"), 4);
+		ped.addItem(mapProdutos.get("Carne"), 40);
+		ped.addItem(mapProdutos.get("Fogao"), 1);
+		numero = ped.getNumero();
+		mapPedidos.put(numero.toString(), ped);
+		cli.addPedido(ped);
+		cli.usarSaldo(ped.totalPedido());
+		
+		try	{ data = dateFormat.parse("12/09/2019"); }catch (Exception e) {}
+		ped = new Pedido(data);
+		cli = mapClientes.get("Maria Santos");
+		ped.setCliente(cli);
+		ped.addItem(mapProdutos.get("Soja"), 100);
+		ped.addItem(mapProdutos.get("Geladeira"), 2);
+		ped.addItem(mapProdutos.get("Fogao"), 2);
+		numero = ped.getNumero();
+		mapPedidos.put(numero.toString(), ped);
+		cli.addPedido(ped);
+		cli.usarSaldo(ped.totalPedido());
+	}
 	
 	// metodos que implementam as funcionalidades do programa
 	public static void criarCliente() 
@@ -318,7 +405,7 @@ public class PooFinal
 	
 	public static void listarProduto()
 	{
-		System.out.print(">> Digite o codigo/nome do produto ou '*' para listar todos: ");
+		System.out.print(">> Digite o nome do produto ou '*' para listar todos: ");
 		String input = scan.nextLine();
 		
 		if (input.compareTo("*") == 0)
@@ -335,16 +422,7 @@ public class PooFinal
 			}
 		}
 		else
-		{
-			// procura por codigo primeiro
-			Produto produto = mapProdutos.get(input);
-		
-			if (produto != null)
-			{
-				System.out.println(produto);
-				return;
-			}
-			
+		{			
 			// procura por nome
 			for (Map.Entry<String, Produto> entry : mapProdutos.entrySet())
 			{
@@ -505,7 +583,7 @@ public class PooFinal
 		}
 		
 		// tudo certo ate aqui, checa se cliente tem saldo para realizar pedido
-		if (cliente.usarSaldo(pedido.totalPedido()))
+		if (!cliente.usarSaldo(pedido.totalPedido()))
 		{
 			System.out.println(">> Cliente nao tem saldo para realizar este pedido.");
 			return;
@@ -515,6 +593,35 @@ public class PooFinal
 		cliente.addPedido(pedido);
 		Long numero = pedido.getNumero();
 		mapPedidos.put(numero.toString(), pedido);
+		System.out.println(">> Pedido " + pedido.getNumero() + " criado com sucesso.");
+	}
+	
+	public static void listarPedidoPorCliente()
+	{
+		System.out.print(">> Digite o nome do cliente para listar pedidos: ");
+		String nome = scan.nextLine();
+		
+		Cliente cliente = mapClientes.get(nome);
+
+		if (cliente != null)
+		{
+			boolean achouAlgum = false;
+			for (Pedido p : mapPedidos.values())
+			{
+				if (cliente == p.getCliente())
+				{
+					p.listarPedidoCompleto();
+					achouAlgum = true;
+				}
+			}
+			
+			if (!achouAlgum)
+				System.out.println("Nao ha pedidos para esse cliente.");
+		}
+		else
+		{
+			System.out.println(">> Nao existe um cliente com esse nome.");
+		}
 	}
 	
 	public static void listarPedidos()
@@ -562,6 +669,7 @@ public class PooFinal
 		{
 			pedido.setStatus(Pedido.STATUS_FINALIZADO);
 			pedido.getCliente().restaurarSaldo(pedido.totalPedido());
+			System.out.println(">> Pedido baixado com sucesso.");
 		}
 		else
 		{

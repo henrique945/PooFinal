@@ -152,8 +152,9 @@ public class Pedido
 	@Override
 	public String toString() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
-		return "#" + numero + ", data: " + dateFormat.format(data) + ", cliente: " + cliente.getNome() + " status:" 
-				+ (status == Pedido.STATUS_ABERTO ? "aberto" : "finalizado");
+		return "#" + numero + ", data: " + dateFormat.format(data) + ", cliente: " + cliente.getNome() + " status: " 
+				+ (status == Pedido.STATUS_ABERTO ? "aberto" : "finalizado")
+				+ "\nvalor total: " + totalPedido() + ", total de impostos: " + totalImposto();
 	}
 	
 	
