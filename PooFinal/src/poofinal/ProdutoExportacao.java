@@ -25,6 +25,6 @@ public class ProdutoExportacao extends Produto
 	@Override
 	public String toString() {
 		String ret = super.toString();
-		return ret + ", tipo: Exportacao, destino: " + destino;
+		return ret + ", Tipo: Exportacao, Destino: " + destino;
 	}
 }

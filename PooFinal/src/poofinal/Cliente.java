@@ -122,7 +122,7 @@ public class Cliente
 
 	@Override
 	public String toString() {
-		return "#" + codigo + " >> " + nome + ", limite: " + limite + ", saldo: " + saldo;
+		return "Cliente #" + codigo + " >> " + nome + ", Limite: " + limite + ", Saldo: " + saldo;
 	}
 	
 	

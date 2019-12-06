@@ -22,6 +22,6 @@ public class ProdutoMercadoInterno extends Produto
 	@Override
 	public String toString() {
 		String ret = super.toString();
-		return ret + ", tipo: Mercado Interno, incentivo: " + (incentivo ? "sim" : "nao");
+		return ret + ", Tipo: Mercado Interno, Incentivo: " + (incentivo ? "Sim" : "Nao");
 	}
 }

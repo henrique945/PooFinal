@@ -107,7 +107,7 @@ public class Produto
 
 	@Override
 	public String toString() {
-		return "#" + codigo + " >> " + nome + ", preco: " + preco + ", categoria: " + categoria.getDescricao();
+		return "Produto #" + codigo + " >> " + nome + ", Preco: " + preco + ", Categoria: " + categoria.getDescricao();
 	}
 	
 	

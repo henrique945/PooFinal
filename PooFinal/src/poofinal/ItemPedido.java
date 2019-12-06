@@ -46,6 +46,8 @@ public class ItemPedido
 
 	@Override
 	public String toString() {
-		return "Item #" + numero + " >> " + produto.getNome() + " (Qtd.: " + quantidade + ")";
+		return "Item #" + numero + " >> " + produto.getNome() + 
+			   ", Qtd.: " + quantidade + ", Vr. Unit.: " + produto.getPreco() + 
+			   ", Vr. Total: " + produto.getPreco() * quantidade;
 	}
 }

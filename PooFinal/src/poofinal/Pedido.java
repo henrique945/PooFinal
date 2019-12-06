@@ -122,6 +122,7 @@ public class Pedido
 		System.out.println("Itens:");
 		for (ItemPedido ip : itens)
 			System.out.println(ip);
+		System.out.print("\n");
 	}
 
 	@Override
@@ -152,9 +153,10 @@ public class Pedido
 	@Override
 	public String toString() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
-		return "#" + numero + ", data: " + dateFormat.format(data) + ", cliente: " + cliente.getNome() + " status: " 
-				+ (status == Pedido.STATUS_ABERTO ? "aberto" : "finalizado")
-				+ "\nvalor total: " + totalPedido() + ", total de impostos: " + totalImposto();
+		return "Pedido #" + numero + " Data: " + dateFormat.format(data) + " Status: " 
+				+ (status == Pedido.STATUS_ABERTO ? "aberto" : "finalizado") 
+				+ "\nCliente: " + cliente.getNome() 
+				+ "\nValor total: " + totalPedido() + ", Total de impostos: " + totalImposto();
 	}
 	
 	
